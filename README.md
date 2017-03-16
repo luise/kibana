@@ -58,17 +58,23 @@ connections from `public`.
 + "MaxPort": 9200
 ```
 
-To get the public IP of an Elasticsearch container, run `quilt containers` and
+To get the public IP of an Elasticsearch container, run `quilt ps` and
 copy the `PUBLIC IP` of any of the Elasticsearch containers. It does not matter
 which Elasticsearch container is used -- interacting with any of them will
 propagate changes to the entire cluster.
 
 ```
-% quilt containers
-ID    MACHINE      CONTAINER            LABELS           STATUS     PUBLIC IP
-2     Machine-3    elasticsearch:2.4    elasticsearch    Running    54.153.44.229:9200
-3     Machine-4    elasticsearch:2.4    elasticsearch    Running    52.53.172.21:9200
-4     Machine-4    kibana:4             kibana           Running    52.53.172.21:5601
+% quilt ps
+MACHINE         ROLE      PROVIDER    REGION       SIZE         PUBLIC IP        STATUS
+404c03a697ed    Master    Amazon      us-west-1    m3.medium    54.183.170.32    connected
+17f5ccb2a7a6    Worker    Amazon      us-west-1    m3.medium    54.153.44.229    connected
+cde7c928f1eb    Worker    Amazon      us-west-1    m3.medium    52.53.172.21     connected
+
+CONTAINER       MACHINE         COMMAND                           LABELS           STATUS     CREATED           PUBLIC IP
+009d3a163255    17f5ccb2a7a6    elasticsearch:2.4 --transport.    elasticsearch    running    30 seconds ago    54.153.44.229:9200
+
+a9b80d0f3b71    cde7c928f1eb    kibana:4 --port 5601 --elastic    kibana           running    17 seconds ago    52.53.172.21:5601
+f693393369e9    cde7c928f1eb    elasticsearch:2.4 --transport.    elasticsearch    running    19 seconds ago    52.53.172.21:9200
 ```
 
 As a sanity check, make sure the container responds.
@@ -118,9 +124,9 @@ curl https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json | curl
 ### Using Kibana
 
 With data in Elasticsearch, we can now view it in Kibana. We can find the
-public IP of the Kibana container using `quilt containers` as before.
+public IP of the Kibana container using `quilt ps` as before.
 
-Go to the address (`54.183.201.132:5601` for the above output) in your browser.
+Go to the address (`52.53.172.21:5601` for the above output) in your browser.
 Uncheck `Index contains time-based events`, set the index to be `shakes*`, and
 hit `Create`.
 
