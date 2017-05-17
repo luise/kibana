@@ -1,5 +1,6 @@
-var Elasticsearch = require("github.com/quilt/elasticsearch").Elasticsearch;
-var Kibana = require("github.com/quilt/kibana").Kibana;
+const {createDeployment, Machine} = require("@quilt/quilt");
+var Elasticsearch = require("@quilt/elasticsearch").Elasticsearch;
+var Kibana = require("./kibana.js").Kibana;
 
 var clusterSize = 2;
 

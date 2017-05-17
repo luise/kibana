@@ -1,3 +1,10 @@
 {
-    "main": "./kibana.js"
+  "name": "@quilt/kibana",
+  "version": "0.0.1",
+  "main": "./kibana.js",
+  "license": "MIT",
+  "dependencies": {
+    "@quilt/quilt": "quilt/quilt",
+    "@quilt/elasticsearch": "quilt/elasticsearch"
+  }
 }

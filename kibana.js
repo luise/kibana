@@ -1,3 +1,5 @@
+const {Service, Container, publicInternet} = require("@quilt/quilt");
+
 function Kibana(es) {
     this.service = new Service("kibana", [
         new Container("kibana:4",
