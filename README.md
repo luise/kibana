@@ -44,7 +44,7 @@ follows:
 
 ```
 -var es = new Elasticsearch(clusterSize);
-+var es = new Elasticsearch(clusterSize).public();
++var es = new Elasticsearch(clusterSize).allowFromPublic();
 ```
 
 Save your change, then `quilt run main.js` for the change to be deployed. The
