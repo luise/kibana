@@ -1,7 +1,7 @@
 # Elasticsearch and Kibana for Quilt.js
 
 [main.js](main.js) contains an example deployment that boots an Elasticsearch
-cluster connected to Kibana, and makes the Kibana web interface publically
+cluster connected to Kibana, and makes the Kibana web interface publicly
 accessible.
 
 [Elasticsearch](https://www.elastic.co/products/elasticsearch) is a
