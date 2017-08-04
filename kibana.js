@@ -8,12 +8,8 @@ function Kibana(es) {
         '--elasticsearch', es.uri(),
       ])]);
   es.addClient(this.service);
-}
-
-Kibana.prototype.public = function public() {
   publicInternet.connect(this.port, this.service);
-  return this;
-};
+}
 
 Kibana.prototype.deploy = function deploy(depl) {
   depl.deploy(this.service);

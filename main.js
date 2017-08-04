@@ -10,5 +10,5 @@ deployment.deploy(baseMachine.asMaster());
 deployment.deploy(baseMachine.asWorker().replicate(clusterSize));
 
 const es = new Elasticsearch(clusterSize);
-const kib = new Kibana(es).public();
+const kib = new Kibana(es);
 deployment.deploy([es, kib]);
