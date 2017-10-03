@@ -12,7 +12,7 @@ function Kibana(es) {
 }
 
 Kibana.prototype.deploy = function deploy(depl) {
-  depl.deploy(this.container);
+  this.container.deploy(depl);
 };
 
 Kibana.prototype.port = 5601;
