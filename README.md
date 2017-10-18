@@ -1,4 +1,4 @@
-# Elasticsearch and Kibana for Quilt.js
+# Elasticsearch and Kibana for Kelda.js
 
 [main.js](main.js) contains an example deployment that boots an Elasticsearch
 cluster connected to Kibana, and makes the Kibana web interface publicly
@@ -12,29 +12,29 @@ Elasticsearch data".
 
 ## Booting The Deployment
 
-This guide assumes Quilt is installed on your machine. If you have not yet
-setup Quilt, please follow the instructions in our [getting started
+This guide assumes Kelda is installed on your machine. If you have not yet
+setup Kelda, please follow the instructions in our [getting started
 guide](../../docs/GettingStarted.md). Specifically, you need to have:
-- The Quilt binary installed
-- The Quilt daemon running
+- The Kelda binary installed
+- The Kelda daemon running
 - AWS credentials setup
 - `QUILT_PATH` configured
 
-To deploy the Elasticsearch and Kibana cluster, simply `quilt run main.js`.
+To deploy the Elasticsearch and Kibana cluster, simply `kelda run main.js`.
 
-You can track the status of the deployment with `quilt ps`. Once the status of
+You can track the status of the deployment with `kelda ps`. Once the status of
 all containers is `Running`, we can begin interacting with our cluster.
 
 ## Interacting With The Cluster
 
-Quilt's job is basically done at this point: the containers are up, and can
+Kelda's job is basically done at this point: the containers are up, and can
 communicate with each other over the network. If a container happens to die,
-Quilt will handle restarting it for you.
+Kelda will handle restarting it for you.
 
 However, we'll still walk through [elastic's
 example](https://www.elastic.co/guide/en/kibana/3.0/using-kibana-for-the-first-time.html)
 of analyzing Shakespeare's works to show off some of the tools that come with
-Quilt.
+Kelda.
 
 ### Seeding Elasticsearch
 
@@ -47,8 +47,8 @@ follows:
 +var es = new Elasticsearch(clusterSize).allowFromPublic();
 ```
 
-Save your change, then `quilt run main.js` for the change to be deployed. The
-diff showed by `quilt run` should show that `elasticsearch` now accepts
+Save your change, then `kelda run main.js` for the change to be deployed. The
+diff showed by `kelda run` should show that `elasticsearch` now accepts
 connections from `public`.
 
 ```
@@ -58,13 +58,13 @@ connections from `public`.
 + "MaxPort": 9200
 ```
 
-To get the public IP of an Elasticsearch container, run `quilt ps` and
+To get the public IP of an Elasticsearch container, run `kelda ps` and
 copy the `PUBLIC IP` of any of the Elasticsearch containers. It does not matter
 which Elasticsearch container is used -- interacting with any of them will
 propagate changes to the entire cluster.
 
 ```
-% quilt ps
+% kelda ps
 MACHINE         ROLE      PROVIDER    REGION       SIZE         PUBLIC IP        STATUS
 404c03a697ed    Master    Amazon      us-west-1    m3.medium    54.183.170.32    connected
 17f5ccb2a7a6    Worker    Amazon      us-west-1    m3.medium    54.153.44.229    connected
@@ -124,7 +124,7 @@ curl https://www.elastic.co/guide/en/kibana/3.0/snippets/shakespeare.json | curl
 ### Using Kibana
 
 With data in Elasticsearch, we can now view it in Kibana. We can find the
-public IP of the Kibana container using `quilt ps` as before.
+public IP of the Kibana container using `kelda ps` as before.
 
 Go to the address (`52.53.172.21:5601` for the above output) in your browser.
 Uncheck `Index contains time-based events`, set the index to be `shakes*`, and
@@ -137,7 +137,7 @@ countrymen`.
 
 ## Cleaning Up
 
-Once done with the cluster, don't forget to destroy it with `quilt stop`.
+Once done with the cluster, don't forget to destroy it with `kelda stop`.
 
 ## More Information
-For more information, see [Quilt](http://quilt.io).
+For more information, see [Kelda](http://kelda.io).

@@ -1,4 +1,4 @@
-const { Container, publicInternet } = require('@quilt/quilt');
+const { Container, publicInternet } = require('kelda');
 
 function Kibana(es) {
   this.container = new Container('kibana', 'kibana:4', {

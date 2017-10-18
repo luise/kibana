@@ -1,11 +1,11 @@
 {
-  "name": "@quilt/kibana",
+  "name": "@kelda/kibana",
   "version": "0.0.1",
   "main": "./kibana.js",
   "license": "MIT",
   "dependencies": {
-    "@quilt/quilt": "quilt/quilt",
-    "@quilt/elasticsearch": "quilt/elasticsearch"
+    "kelda": "0.x",
+    "@kelda/elasticsearch": "kelda/elasticsearch"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
