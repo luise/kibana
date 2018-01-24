@@ -1,4 +1,4 @@
-const { Container, publicInternet } = require('kelda');
+const { Container, publicInternet, allowTraffic } = require('kelda');
 
 function Kibana(es) {
   this.container = new Container('kibana', 'kibana:4', {
@@ -8,7 +8,7 @@ function Kibana(es) {
     ],
   });
   es.addClient(this.container);
-  this.container.allowFrom(publicInternet, this.port);
+  allowTraffic(publicInternet, this.container, this.port);
 }
 
 Kibana.prototype.deploy = function deploy(depl) {
