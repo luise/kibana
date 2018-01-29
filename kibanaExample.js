@@ -11,5 +11,6 @@ const infra = new Infrastructure(
 
 const es = new Elasticsearch(clusterSize);
 es.deploy(infra);
-const kib = new Kibana(es);
+const kib = new Kibana(es.uri());
+es.addClient(kib);
 kib.deploy(infra);
