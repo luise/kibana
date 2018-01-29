@@ -1,16 +1,13 @@
-const { Infrastructure, Machine } = require('kelda');
-const Elasticsearch = require('@kelda/elasticsearch').Elasticsearch;
+const kelda = require('kelda');
 const Kibana = require('./kibana.js').Kibana;
 
-const clusterSize = 2;
+const baseMachine = new kelda.Machine({ provider: 'Amazon' });
+const infra = new kelda.Infrastructure(baseMachine, baseMachine);
 
-const baseMachine = new Machine({ provider: 'Amazon' });
-const infra = new Infrastructure(
-  baseMachine,
-  baseMachine.replicate(clusterSize));
+const elasticsearchURL = '<ELASTICSEARCH URL>';
+const elasticsearchPort = 443;
+const elasticsearchURLWithPort = `${elasticsearchURL}:${elasticsearchPort}`;
 
-const es = new Elasticsearch(clusterSize);
-es.deploy(infra);
-const kib = new Kibana(es.uri());
-es.addClient(kib);
+const kib = new Kibana(elasticsearchURLWithPort);
+kelda.allowTraffic(kib, kelda.publicInternet, elasticsearchPort);
 kib.deploy(infra);

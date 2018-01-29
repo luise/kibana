@@ -4,8 +4,7 @@
   "main": "./kibana.js",
   "license": "MIT",
   "dependencies": {
-    "kelda": ">=0.0.5 <1.0.0",
-    "@kelda/elasticsearch": "kelda/elasticsearch"
+    "kelda": ">=0.0.5 <1.0.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
