@@ -13,3 +13,9 @@ to. Replace the `<ELASTICSEARCH URL>` string in
 
 It may be necessary to may also be necessary to modify the `elasticsearchPort`
 constant if the Elasticsearch cluster does not listen on port `443`.
+
+## Kelda-Hosted Elasticsearch
+
+**Note** The Kelda Elasticsearch blueprint is not compatible with the version
+of Kibana deployed by this blueprint. The Kelda Elasticsearch blueprint boots
+version 2.4, which is incompatible with Kibana version 6.
