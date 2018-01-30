@@ -1,17 +1,23 @@
-const { Container, publicInternet, allowTraffic } = require('kelda');
+const kelda = require('kelda');
+const Mustache = require('mustache');
+const path = require('path');
+const fs = require('fs');
 
-const image = 'docker.elastic.co/kibana/kibana-oss:6.0.1';
 const port = 5601;
+const dockerfilePath = path.join(__dirname, 'Dockerfile');
+const dockerfileTemplate = fs.readFileSync(dockerfilePath, { encoding: 'utf8' });
 
-class Kibana extends Container {
-  constructor(esURL) {
+class Kibana extends kelda.Container {
+  constructor(esURL, plugins = []) {
+    const dockerfile = Mustache.render(dockerfileTemplate, { plugins });
+    const image = new kelda.Image('kelda-kibana', dockerfile);
     super('kibana', image, {
       env: {
         SERVER_PORT: port.toString(),
         ELASTICSEARCH_URL: esURL,
       },
     });
-    allowTraffic(publicInternet, this, port);
+    kelda.allowTraffic(kelda.publicInternet, this, port);
   }
 }
 
