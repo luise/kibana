@@ -8,6 +8,6 @@ const elasticsearchURL = '<ELASTICSEARCH URL>';
 const elasticsearchPort = 443;
 const elasticsearchURLWithPort = `${elasticsearchURL}:${elasticsearchPort}`;
 
-const kib = new Kibana(elasticsearchURLWithPort);
-kelda.allowTraffic(kib, kelda.publicInternet, elasticsearchPort);
-kib.deploy(infra);
+const kibana = new Kibana(elasticsearchURLWithPort);
+kelda.allowTraffic(kibana, kelda.publicInternet, elasticsearchPort);
+kibana.deploy(infra);
