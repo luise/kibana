@@ -5,7 +5,7 @@ const Kibana = require('./kibana.js').Kibana;
 // up the boot time. Installing a plugin on m3.large takes about 5 minutes,
 // while m3.medium takes about 10 minutes.
 const baseMachine = new kelda.Machine({ provider: 'Amazon', size: 'm3.large' });
-const infra = new kelda.Infrastructure(baseMachine, baseMachine);
+const infra = new kelda.Infrastructure({ masters: baseMachine, workers: baseMachine });
 
 const elasticsearchURL = '<ELASTICSEARCH URL>';
 const elasticsearchPort = 443;

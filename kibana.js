@@ -10,8 +10,10 @@ const dockerfileTemplate = fs.readFileSync(dockerfilePath, { encoding: 'utf8' })
 class Kibana extends kelda.Container {
   constructor(esURL, plugins = []) {
     const dockerfile = Mustache.render(dockerfileTemplate, { plugins });
-    const image = new kelda.Image('kelda-kibana', dockerfile);
-    super('kibana', image, {
+    const image = new kelda.Image({ name: 'kelda-kibana', dockerfile });
+    super({
+      name: 'kibana',
+      image,
       env: {
         SERVER_PORT: port.toString(),
         ELASTICSEARCH_URL: esURL,
